@@ -49,7 +49,7 @@ def make_ext(modname, pyxfilename):
         # zero error code means everything was fine
         return result == 0
 
-    extra_compile_args = ['-O3', '-march=native']
+    extra_compile_args = ['-O3', '-march=x86-64']
     extra_link_args = []
 
     if check_for_openmp():
@@ -72,7 +72,7 @@ with open(os.path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 # Extension
-extensions = [make_ext(modname="TGV_QSM/qsm_tgv_cython_helper", pyxfilename="TGV_QSM/qsm_tgv_cython_helper.pyx")]
+extensions = [make_ext(modname="qsm_tgv_cython_helper", pyxfilename="TGV_QSM/qsm_tgv_cython_helper.pyx")]
 
 setup(
     name='TGV_QSM',

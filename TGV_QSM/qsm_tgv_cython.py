@@ -68,6 +68,14 @@ def qsm_tgv(laplace_phi0, mask, res, alpha=(0.2, 0.1), iterations=1000, vis=Fals
     p = zeros(grad_phi_shape, dtype=dtype, order='C')
     q = zeros(hess_phi_shape, dtype=dtype, order='C')
 
+    # de-dimensionalize
+    res_corr = prod(res)**(-1/3)
+    res = array(res)*res_corr
+    alpha = array(alpha)
+    alpha[1] *= res_corr
+    alpha[0] *= res_corr**2
+    laplace_phi0 /= res_corr**2
+
     # estimate squared norm
     grad_norm_sqr = 4.0*(sum(1.0/(res**2)))
     

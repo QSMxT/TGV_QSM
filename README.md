@@ -12,18 +12,18 @@ Kristian Bredies and Christian Langkammer:
 
 ```bash
 # install miniconda with dependencies
-!wget https://repo.anaconda.com/miniconda/Miniconda2-4.6.14-Linux-x86_64.sh
-!bash Miniconda2-4.6.14-Linux-x86_64.sh -b -p miniconda2
-!miniconda2/bin/conda install -y -c anaconda cython==0.29.4
-!miniconda2/bin/conda install -y numpy
-!miniconda2/bin/conda install -y pyparsing
-!miniconda2/bin/pip install scipy==0.17.1 nibabel==2.1.0
-!miniconda2/bin/pip install --upgrade cython
+wget https://repo.anaconda.com/miniconda/Miniconda2-4.6.14-Linux-x86_64.sh
+bash Miniconda2-4.6.14-Linux-x86_64.sh -b -p miniconda2
+miniconda2/bin/conda install -y -c anaconda cython==0.29.4
+miniconda2/bin/conda install -y numpy
+miniconda2/bin/conda install -y pyparsing
+miniconda2/bin/pip install scipy==0.17.1 nibabel==2.1.0
+miniconda2/bin/pip install --upgrade cython
 
 # install TGV_QSM
-!git clone https://github.com/QSMxT/TGV_QSM.git
-!cd "TGV_QSM"
-!../miniconda2/bin/python setup.py install
+git clone https://github.com/QSMxT/TGV_QSM.git
+cd "TGV_QSM"
+../miniconda2/bin/python setup.py install
 
 # run TGV_QSM
 miniconda2/bin/tgv_qsm

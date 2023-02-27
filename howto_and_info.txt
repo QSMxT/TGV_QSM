@@ -1,0 +1,65 @@
+QSM reconstruction using Total Generalized Variation (TGV-QSM)
+Kristian Bredies and Christian Langkammer
+Version from December 2014 
+www.neuroimaging.at
+
+=== Command line options ===
+
+python qsm_tgv_main.py 
+		-a <magnitude.nii.gz> 
+		-p <phase.nii.gz> 
+		-m <brainmask.nii.gz> 
+		-o <outputname.nii.gz>
+ 		-t TE in seconds
+  		-f fieldstrength in Tesla
+
+test data:
+python qsm_tgv_main.py -a epi3d_test_magni.nii.gz -p epi3d_test_phase.nii.gz -m epi3d_test_mask.nii.gz -f 2.89 -t 0.027 -o epi3d_test_QSM
+
+
+=== bet brain masking  ===
+
+for high res data (~0.5 mm iso) this does quite a good job
+
+bet magni.nii.gz mask -n -m -R -f 0.1 -g 0.0
+	(in case something is lost I vary parameter g minimally)
+
+=== Orientation ===
+...thanks Daniel!
+
+Input gradient echo data is required to be transversally oriented. 
+If data set is arbritary oriented, this will register it to MNI space:
+
+flirt -in infile.nii.gz -ref /usr/local/fsl/data/standard/MNI152_T1_1mm.nii.gz -noresampblur -interp sinc -applyxfm -usesqform -out outfile.nii.gz
+
+
+=== Mac compatibility issues === 
+...thanks Marco!
+
+modifying includes in the file qsm_tgv_cython.py  
+
+from numpy import *
+import numpy as np  ### this line added
+
+#import pyximport; pyximport.install()
+import pyximport;
+pyximport.install(setup_args={"include_dirs":np.get_include()});   ### change numpy as np
+
+
+=== Use with Windows Anaconda package === 
+...thanks Petr!
+
+1. install Anaconda Python 2.7 64bit
+http://continuum.io/downloads
+
+2. Install Visual Studio 2008 express Edition and Windows Server 2008 & .NET 3.5 SDK according to these instructions:
+http://springflex.blogspot.de/2014/02/how-to-fix-valueerror-when-trying-to.html
+
+3. install nibabel module:
+http://nipy.org/nibabel/installation.html#installation
+
+4. copy the „qsm_tgv_*“ scripts to the Anadonda package path
+
+5. add line "import numpy" to the beginning of the script "qsm_tgv_cython.py"
+
+ 

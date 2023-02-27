@@ -1,9 +1,0 @@
-import numpy as np
-from distutils.extension import Extension
-
-def make_ext(modname, pyxfilename):
-    return Extension(name = modname, 
-                     sources = ['qsm_tgv_cython_helper.pyx'],
-                     include_dirs = [np.get_include()],
-                     libraries = ['gomp'],
-                     extra_compile_args = ['-fopenmp'])

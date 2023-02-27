@@ -2,18 +2,14 @@
 #cython: wraparound=False
 #cython: cdivision=True
 
-cimport cython
 from numpy cimport *
 from cython.parallel cimport prange
-#from libcpp cimport bool
-#from cpython cimport bool
 
 cdef extern from "math.h" nogil:
     float fabs(float)
 
 cdef extern from "math.h" nogil:
     float sqrtf(float)
-
 
 ###############################################
 # TGV-QSM routines
@@ -598,7 +594,7 @@ def tgv_deconv_update_w(ndarray[float, ndim=4, mode="c"] w_dest not None, \
                 q0x = q0x - q[i-1,j,k,0]*res0inv if i > 0 else q0x
                 q1y = q[i,j,k,1]        *res0inv if j < ny - 1 else <float>0.0
                 q1y = q1y - q[i,j-1,k,1]*res0inv if j > 0 else q1y
-                q2z = q[i,j,k,2]        *res0inv if k < nz - 1 else <float>0.0
+                q2z = q[i,j,k,2]        *res0inv if k <     nz - 1 else <float>0.0
                 q2z = q2z - q[i,j,k-1,2]*res0inv if k > 0 else q2z
 
                 q1x = q[i,j,k,1]        *res1inv if i < nx - 1 else <float>0.0
@@ -648,3 +644,4 @@ def erode_mask(ndarray[float, ndim=3, mode="c"] dest not None, \
                 v6 = <int>(src[i,j,k+1] != 0) if (k < nz-1) else 1
                 
                 dest[i,j,k] = <float>1.0 if (v0+v1+v2+v3+v4+v5+v6 == 7) else <float>0.0
+

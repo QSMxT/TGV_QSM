@@ -97,14 +97,14 @@ def qsm_tgv(laplace_phi0, mask, res, alpha=(0.2, 0.1), iterations=1000, vis=Fals
 
     k = 0
     if verbose:
-        print("Starting QSM reconstruction...", file=sys.stderr)
+        print("Starting QSM reconstruction...")
     
     while k < iterations:
 
         progressbar.update_progress(float(k)/float(iterations))
 
         if verbose:
-            print("Iteration %d" % k, file=sys.stderr)
+            print("Iteration %d" % k)
 
 
         tau = float32(1.0/sqrt(norm_sqr))
@@ -114,17 +114,17 @@ def qsm_tgv(laplace_phi0, mask, res, alpha=(0.2, 0.1), iterations=1000, vis=Fals
         # dual update
 
         if verbose:
-            print("updating eta...", file=sys.stderr)
+            print("updating eta...")
         tgv_update_eta(eta, phi_, chi_, laplace_phi0,
                        mask0, sigma, res0, res1, res2)
 
         if verbose:
-            print("updating p...", file=sys.stderr)
+            print("updating p...")
         tgv_update_p(p, chi_, w_, mask, mask0, sigma, alpha1,
                      res0, res1, res2)
 
         if verbose:
-            print("updating q...", file=sys.stderr)
+            print("updating q...")
         tgv_update_q(q, w_, mask0, sigma, alpha0, res0, res1, res2)
 
         #######################
@@ -138,24 +138,24 @@ def qsm_tgv(laplace_phi0, mask, res, alpha=(0.2, 0.1), iterations=1000, vis=Fals
         # primal update
 
         if verbose:
-            print("updating phi...", file=sys.stderr)
+            print("updating phi...")
         tgv_update_phi(phi, phi_, eta, mask, mask0, tau,
                        res0, res1, res2)
 
         if verbose:
-            print("updating chi...", file=sys.stderr)
+            print("updating chi...")
         tgv_update_chi(chi, chi_, eta, p, mask0, tau,
                        res0, res1, res2)
 
         if verbose:
-            print("updating w...", file=sys.stderr)
+            print("updating w...")
         tgv_update_w(w, w_, p, q, mask, mask0, tau, res0, res1, res2)
 
         ######################
         # extragradient update
 
         if verbose:
-            print("updating chi_, w_...", file=sys.stderr)
+            print("updating chi_, w_...")
 
         extragradient_update(phi_.ravel(), phi.ravel())
         extragradient_update(chi_.ravel(), chi.ravel())

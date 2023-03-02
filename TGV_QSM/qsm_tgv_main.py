@@ -81,7 +81,7 @@ def read_magnitude_image(fname, force_diag=True, do_resampling=True, is_mask_ima
                 raise nib.orientations.OrientationError
         elif do_resampling:
             interp_type = 0 if is_mask_image else "continous"
-            print('Resampling magnitude/mask data...', file=sys.stderr)
+            print('Resampling magnitude/mask data...')
             mag_data = resample.resample_to_physical(mag_data, interpolation=interp_type)
 
     data = array(mag_data.get_data())
@@ -104,7 +104,7 @@ def read_phase_image(fname, mode=0, force_diag=True, do_resampling=True):
     pha_data = nib.as_closest_canonical(nib.load(fname))
 
     if mode == 0:
-        print('Rescaling phase data...', file=sys.stderr)
+        print('Rescaling phase data...')
         data = pha_data.get_data()
         data = array(data)/4096.0*pi
         pha_data = resample.new_img_like(pha_data, data)
@@ -114,7 +114,7 @@ def read_phase_image(fname, mode=0, force_diag=True, do_resampling=True):
             if not _aff_is_diag(pha_data.affine):
                 raise nib.orientations.OrientationError
         elif do_resampling:
-            print('Resampling phase data...', file=sys.stderr)
+            print('Resampling phase data...')
             cplx_nii = resample.phase_as_cplx(pha_data)
             cplx_nii_res = resample.resample_to_physical(cplx_nii)
             pha_data = resample.cplx_to_phase(cplx_nii_res)
@@ -298,17 +298,17 @@ def main():
     
     args = parser.parse_args()
 
-    print(" >>>>  TGV-QSM  <<<<< ", file=sys.stderr)
-    print("-----------------------------------------", file=sys.stderr)
-    print("loading files...", file=sys.stderr)
+    print(" >>>>  TGV-QSM  <<<<< ")
+    print("-----------------------------------------")
+    print("loading files...")
 
     outfilename = args.phase.replace(".nii.gz", "").replace(".nii", "")
     outfilename += args.output_suffix.replace(".nii.gz", "").replace(".nii", "")
     outfilename += "_{number:03d}.nii.gz"
 
-    print("  phase: " + args.phase, file=sys.stderr)
-    print("  mask:  " + args.mask, file=sys.stderr)
-    print("  output: " + outfilename, file=sys.stderr)
+    print("  phase: " + args.phase)
+    print("  mask:  " + args.mask)
+    print("  output: " + outfilename)
 
     # Read and scale the data
     mode = 0 if args.rescale_phase else 1
@@ -346,9 +346,9 @@ def main():
     else:
         scale = 1.0  # TODO DB CHECK THIS!!! hmm is this correct? Probably not!
 
-    print("Data looks good!", file=sys.stderr)
+    print("Data looks good!")
 
-    print("Processing initial laplacian of %s ..." % args.phase, file=sys.stderr)
+    print("Processing initial laplacian of %s ..." % args.phase)
     laplace_phi0 = get_laplace_phase3(phase, res)
 
     if args.save_laplacian:
@@ -356,7 +356,7 @@ def main():
                    laplace_phi0,
                    res=res)
 
-    print("Processing QSM %s ..." % args.phase, file=sys.stderr)
+    print("Processing QSM %s ..." % args.phase)
 
     number = 0
     for fc, fac in enumerate(args.factors):
@@ -364,7 +364,7 @@ def main():
         alpha1 = args.alpha[1]*fac
 
         print('Factor {f} ({n} of {m}) - alpha = ({a0}, {a1})'.format(f=fac, n=fc + 1, m=len(args.factors), a0=alpha0,
-                                                                      a1=alpha1), file=sys.stderr)
+                                                                      a1=alpha1))
 
         # Copy mask
         mask = mask_orig.copy()
@@ -397,10 +397,10 @@ def main():
             nii.header['descrip'] = desc_string.format(alpha0=alpha0, alpha1=alpha1, iters=iteration)
             outname = outfilename.format(number=number)
             nii.to_filename(outname)
-            print("  Saved " + outname, file=sys.stderr)
+            print("  Saved " + outname)
             number += 1
 
-    print("Finished!", file=sys.stderr)
+    print("Finished!")
 
     return 0
 

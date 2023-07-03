@@ -266,7 +266,7 @@ def main():
 
     group = parser.add_mutually_exclusive_group()
     group.add_argument(      '--alpha', help='Regularisation Parameters alpha_0, alpha_1. ', type=float, nargs=2,
-                                        required=False, default=[0.0015, 0.0005]                              )
+                                        required=False, default=[0.003, 0.0010]                              )
 
     group.add_argument(      '--factors',help='Scaling factor for default values of regularisation parameters',
                                         type=float, nargs="+", required=False, default=[1.0])

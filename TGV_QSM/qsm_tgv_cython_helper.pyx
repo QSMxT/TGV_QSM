@@ -107,7 +107,7 @@ def tgv_update_p(ndarray[float, ndim=4, mode="c"] p not None, \
                 px = p[i,j,k,0] + sigmaw0*dxp - sigmaw*w[i,j,k,0]
                 py = p[i,j,k,1] + sigmaw0*dyp - sigmaw*w[i,j,k,1]
                 pz = p[i,j,k,2] + sigmaw0*dzp - sigmaw*w[i,j,k,2]
-                pabs = sqrtf(px*px + py*py * pz*pz)*alphainv
+                pabs = sqrtf(px*px + py*py + pz*pz)*alphainv
                 pabs = <float>1.0/pabs if (pabs > <float>1.0) else <float>1.0
 
                 p[i,j,k,0] = px*pabs

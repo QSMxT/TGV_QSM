@@ -29,6 +29,20 @@ cd "TGV_QSM"
 miniconda2/bin/tgv_qsm
 ```
 
+### Potential install problems
+Miniconda2 doesn't run on newer OS versions. In that case, Python2 can be installed via Miniconda3
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh # interactive
+conda create -n python2env python=2
+conda activate python2env
+```
+
+OpenMP is not available
+```bash
+sudo apt install libgomp1
+```
+
 ## Usage
 
 ```

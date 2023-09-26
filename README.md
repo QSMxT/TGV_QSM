@@ -8,6 +8,10 @@ Kristian Bredies and Christian Langkammer:
 
 - Langkammer, C., Bredies, K., Poser, B. A., Barth, M., Reishofer, G., Fan, A. P., ... & Ropele, S. (2015). Fast quantitative susceptibility mapping using 3D EPI and total generalized variation. Neuroimage, 111, 622-630.
 
+## This version is deprecated
+
+Consider using the easy-to-install [Julia version](https://github.com/korbinian90/QuantitativeSusceptibilityMappingTGV.jl) instead or use the end-to-end QSM toolbox [QSMxT](https://qsmxt.github.io/QSMxT/)
+
 ## Install and run
 
 ```bash

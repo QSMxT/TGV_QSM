@@ -1,5 +1,7 @@
 # QSM reconstruction using Total Generalized Variation (TGV-QSM)
 
+THIS SOFTWARE IS DEPRECIATED, NO LONGER MAINTAINED, AND SUPERSEDED BY THE [JULIA VERSION](https://github.com/korbinian90/QuantitativeSusceptibilityMappingTGV.jl/).
+
 ## References
 
 Kristian Bredies and Christian Langkammer:

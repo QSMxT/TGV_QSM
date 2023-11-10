@@ -10,6 +10,10 @@ Kristian Bredies and Christian Langkammer:
 
 - Langkammer, C., Bredies, K., Poser, B. A., Barth, M., Reishofer, G., Fan, A. P., ... & Ropele, S. (2015). Fast quantitative susceptibility mapping using 3D EPI and total generalized variation. Neuroimage, 111, 622-630.
 
+## This version is deprecated
+
+Consider using the easy-to-install [Julia version](https://github.com/korbinian90/QuantitativeSusceptibilityMappingTGV.jl) instead or use the end-to-end QSM toolbox [QSMxT](https://qsmxt.github.io/QSMxT/)
+
 ## Install and run
 
 ```bash
@@ -29,6 +33,20 @@ cd "TGV_QSM"
 
 # run TGV_QSM
 miniconda2/bin/tgv_qsm
+```
+
+### Potential install problems
+Miniconda2 doesn't run on newer OS versions. In that case, Python2 can be installed via Miniconda3
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh # interactive
+conda create -n python2env python=2
+conda activate python2env
+```
+
+OpenMP is not available
+```bash
+sudo apt install libgomp1
 ```
 
 ## Usage

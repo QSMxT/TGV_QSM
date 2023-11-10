@@ -69,7 +69,7 @@ def qsm_tgv(laplace_phi0, mask, res, alpha=(0.2, 0.1), iterations=1000, vis=Fals
     q = zeros(hess_phi_shape, dtype=dtype, order='C')
 
     # de-dimensionalize
-    res_corr = prod(res)**(-1.0/3.0)
+    res_corr = abs(prod(res))**(-1.0/3.0)
     res = array(res)*res_corr
     alpha = array(alpha)
     alpha[1] *= res_corr
